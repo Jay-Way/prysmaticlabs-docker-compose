@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    prysmaticlabs_validator:
+        volumes:
+            - '$HOME/prysm:/data'
+        network_mode: host
+        image: 'gcr.io/prysmaticlabs/prysm/validator:latest'
+        command: --beacon-rpc-provider=127.0.0.1:4000 --keymanager=keystore --keymanageropts='{"path":"/data","passphrase":"Seagate42"}'
+    prysmaticlabs_chain:
+        volumes:
+            - '$HOME/prysm:/data'
+        ports:
+            - '4000:4000'
+        image: 'gcr.io/prysmaticlabs/prysm/beacon-chain:latest'
